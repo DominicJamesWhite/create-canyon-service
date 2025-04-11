@@ -63,15 +63,26 @@ functions.http("createCloudRunService", async (req, res) => {
   );
 
   // --- Format Environment Variables ---
+  // Read the service account key JSON from the environment variable populated by Secret Manager
+  const serviceAccountKeyJson = process.env.GOOGLE_ENVIRONMENT_VARIABLES;
+
+  if (!serviceAccountKeyJson) {
+    console.error(
+      "GOOGLE_ENVIRONMENT_VARIABLES is not set. Ensure the secret is mounted correctly."
+    );
+    res
+      .status(500)
+      .send("Server configuration error: Missing service account key.");
+    return;
+  }
+
   const envVars = [
     { name: "ENABLE_MCP", value: "true" },
     { name: "DEFAULT_MODEL", value: "gemini-2.5-pro-preview-03-25" },
     { name: "HUMANITEC_TOKEN", value: HUMANITEC_TOKEN },
     { name: "GOOGLE_API_KEY", value: GOOGLE_API_KEY },
-    {
-      name: "GOOGLE_APPLICATION_CREDENTIALS",
-      value: GOOGLE_APPLICATION_CREDENTIALS,
-    },
+    // Pass the key content itself as an environment variable to the new service
+    { name: "GOOGLE_APPLICATION_CREDENTIALS", value: serviceAccountKeyJson },
   ];
 
   // --- Construct Service Definition ---
