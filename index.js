@@ -56,7 +56,7 @@ functions.http("createCloudRunService", async (req, res) => {
 
   const parent = `projects/${projectId}/locations/${region}`;
   const serviceId = serviceName; // Use the provided name as the service ID
-  const fixedContainerImage = `us-central1-docker.pkg.dev/${projectId}/github-actions-builds/canyonchat:17f96adf511309c19f9d5e640f0b8dc3fbdefc06`;
+  const fixedContainerImage = `us-central1-docker.pkg.dev/${projectId}/cloud-run-source-deploy/canyonchat/default-canyon@sha256:3092f35a19526935979d2fe653c8f5c75585b28596f0c76eb12c8173e8627c02`;
 
   console.log(
     `Attempting to create service "${serviceId}" in ${parent} with image "${fixedContainerImage}"`
