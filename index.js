@@ -68,6 +68,10 @@ functions.http("createCloudRunService", async (req, res) => {
     { name: "DEFAULT_MODEL", value: "gemini-2.5-pro-preview-03-25" },
     { name: "HUMANITEC_TOKEN", value: HUMANITEC_TOKEN },
     { name: "GOOGLE_API_KEY", value: GOOGLE_API_KEY },
+    {
+      name: "GOOGLE_APPLICATION_CREDENTIALS",
+      value: GOOGLE_APPLICATION_CREDENTIALS,
+    },
   ];
 
   // --- Construct Service Definition ---
