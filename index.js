@@ -82,7 +82,7 @@ functions.http("createCloudRunService", async (req, res) => {
     { name: "HUMANITEC_TOKEN", value: HUMANITEC_TOKEN },
     { name: "GOOGLE_API_KEY", value: GOOGLE_API_KEY },
     // Pass the key content itself as an environment variable to the new service
-    { name: "GOOGLE_APPLICATION_CREDENTIALS", value: serviceAccountKeyJson },
+    { name: "GCP_SERVICE_ACCOUNT_KEY_JSON", value: serviceAccountKeyJson },
   ];
 
   // --- Construct Service Definition ---
